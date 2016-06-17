@@ -1,0 +1,30 @@
+{
+  "id": "/zwitscher/edge",
+  "instances": 1,
+  "mem": 512,
+  "acceptedResourceRoles": ["slave_public"],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "qaware-oss-docker-registry.bintray.io/zwitscher/zwitscher-edge:1.0.1",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8765, "protocol": "tcp" }
+      ]
+    }
+  },
+  "env": {
+    "EUREKA_HOST": "eureka.zwitscher.marathon.mesos",
+    "JAVA_OPTS": "-Xmx256m"
+  },
+  "healthChecks": [
+    {
+      "protocol": "HTTP",
+      "portIndex": 0,
+      "path": "/admin/health",
+      "gracePeriodSeconds": 5,
+      "intervalSeconds": 30,
+      "maxConsecutiveFailures": 3
+    }
+  ]
+}

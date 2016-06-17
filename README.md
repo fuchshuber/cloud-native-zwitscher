@@ -206,8 +206,16 @@ kubectl.sh delete -f k8s-zwitscher.yml
 
 ### DC/OS
 
-_Soon to come..._
+#### Deployments
 
+```shell
+dcos marathon app add < zwitscher-eureka\marathon-zwitscher-eureka.json
+dcos marathon app add < zwitscher-config\marathon-zwitscher-config.json
+dcos marathon app add < zwitscher-service\marathon-zwitscher-service.json
+dcos marathon app add < zwitscher-board\marathon-zwitscher-board.json
+dcos marathon app add < zwitscher-monitor\marathon-zwitscher-monitor.json
+dcos marathon app add < zwitscher-edge\marathon-zwitscher-edge.json
+```
 
 ## References
 
