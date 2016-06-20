@@ -1,9 +1,10 @@
 {
-  "id": "zwitscher/board",
+  "id": "/zwitscher/board",
   "instances": 1,
-  "mem": 512,
+  "mem": 384,
   "cpus": 0.2,
-  "acceptedResourceRoles": ["slave_public"],
+  "dependencies": ["/zwitscher/service"],
+  "cmd": "/opt/java/latest/bin/java -Xmx256m -Deureka.instance.nonSecurePort=$PORT0 -jar /opt/zwitscher-board/zwitscher-board.jar",
   "container": {
     "type": "DOCKER",
     "docker": {
@@ -16,7 +17,7 @@
   },
   "env": {
     "EUREKA_HOST": "eureka.zwitscher.marathon.mesos",
-    "JAVA_OPTS": "-Xmx256m"
+    "EUREKA_INSTANCE_HOSTNAME": "board.zwitscher.marathon.mesos"    
   },
   "healthChecks": [
     {

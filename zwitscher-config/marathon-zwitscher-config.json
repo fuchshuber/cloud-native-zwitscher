@@ -1,22 +1,25 @@
 {
-  "id": "zwitscher/config",
+  "id": "/zwitscher/config",
   "instances": 1,
-  "mem": 512,
+  "mem": 384,
   "cpus": 0.1,
-  "acceptedResourceRoles": ["slave_public"],
+  "ports": [0],
+  "dependencies": ["/zwitscher/eureka"],
+  "cmd": "/opt/java/latest/bin/java -Xmx256m -Dspring.profiles.active=docker -Dspring.cloud.config.server.git.uri=https://github.com/fuchshuber/zwitscher-config.git -Deureka.instance.nonSecurePort=$PORT0 -jar /opt/zwitscher-config/zwitscher-config.jar",
   "container": {
     "type": "DOCKER",
     "docker": {
       "image": "qaware-oss-docker-registry.bintray.io/zwitscher/zwitscher-config:1.0.1",
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 8888, "hostPort": 8888, "servicePort": 8888, "protocol": "tcp" }
+        { "containerPort": 8888, "protocol": "tcp" }
       ]
     }
   },
   "env": {
-    "EUREKA_HOST": "eureka.zwitscher.marathon.mesos",	
-    "JAVA_OPTS": "-Xmx256m"
+    "EUREKA_HOST": "eureka.zwitscher.marathon.mesos",
+    "EUREKA_INSTANCE_HOSTNAME": "config.zwitscher.marathon.mesos",
+    "EUREKA_INSTANCE_PREFER_IP_ADDRESS": "false"
   },
   "healthChecks": [
     {

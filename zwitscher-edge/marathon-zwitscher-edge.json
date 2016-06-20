@@ -1,8 +1,10 @@
 {
   "id": "/zwitscher/edge",
   "instances": 1,
-  "mem": 512,
+  "mem": 384,
+  "cpus": 0.1,
   "acceptedResourceRoles": ["slave_public"],
+  "dependencies": ["/zwitscher/board"],
   "container": {
     "type": "DOCKER",
     "docker": {
@@ -15,6 +17,8 @@
   },
   "env": {
     "EUREKA_HOST": "eureka.zwitscher.marathon.mesos",
+    "EUREKA_INSTANCE_HOSTNAME": "edge.zwitscher.marathon.mesos",
+    "EUREKA_INSTANCE_PREFER_IP_ADDRESS": "false",
     "JAVA_OPTS": "-Xmx256m"
   },
   "healthChecks": [

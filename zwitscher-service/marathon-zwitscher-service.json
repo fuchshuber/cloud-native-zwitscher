@@ -1,9 +1,11 @@
 {
-  "id": "zwitscher/service",
+  "id": "/zwitscher/service",
   "instances": 1,
-  "mem": 512,
+  "mem": 384,
   "cpus": 0.2,
-  "acceptedResourceRoles": ["slave_public"],
+  "ports": [0],
+  "dependencies": ["/zwitscher/config", "/zwitscher/eureka"],
+  "cmd": "/opt/java/latest/bin/java -Xmx256m -Deureka.instance.nonSecurePort=$PORT0 -jar /opt/zwitscher-service/zwitscher-service.jar",
   "container": {
     "type": "DOCKER",
     "docker": {
@@ -15,8 +17,9 @@
     }
   },
   "env": {
-    "EUREKA_HOST": "eureka.zwitscher.marathon.mesos",	
-    "JAVA_OPTS": "-Xmx256m"
+    "EUREKA_HOST": "eureka.zwitscher.marathon.mesos",
+    "EUREKA_INSTANCE_HOSTNAME": "service.zwitscher.marathon.mesos",
+    "EUREKA_INSTANCE_PREFER_IP_ADDRESS": "false"
   },
   "healthChecks": [
     {

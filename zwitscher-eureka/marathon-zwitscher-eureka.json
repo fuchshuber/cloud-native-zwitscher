@@ -1,7 +1,7 @@
 {
-  "id": "zwitscher/eureka",
+  "id": "/zwitscher/eureka",
   "instances": 1,
-  "mem": 512,
+  "mem": 384,
   "cpus": 0.1,
   "acceptedResourceRoles": ["slave_public"],
   "container": {
